@@ -178,8 +178,8 @@ const startApp = async () => {
 
   await Promise.all([lessons, pokemon])
 
-  app.listen(4000, () =>
-    console.log(`🚀 Server ready at https://localhost:4000${server.graphqlPath}`)
+  app.listen(3009, () =>
+    console.log(`🚀 Server ready at https://localhost:3009${server.graphqlPath}`)
   )
 }
 
