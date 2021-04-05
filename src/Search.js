@@ -2,7 +2,7 @@ import React from 'react';
 import sendQuery from './sendQuery'
 
 const PokeName = (props) => {
-  return <h3 onClick={props.clickSelection}>{props.pokeList}</h3>
+  return <h3 style={{cursor: "pointer"}} onClick={props.clickSelection}>{props.pokeList}</h3>
 }
 
 const PokemonSelected = (props) => {
