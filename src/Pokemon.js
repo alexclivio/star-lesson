@@ -6,15 +6,11 @@ import sendQuery from './sendQuery'
 const Pokemon = () => {
   const [login, setLogin] = React.useState({loading: true})
   React.useEffect(() => {
-    loginCheck()
-  }, [])
-
-  const loginCheck = () => {
     sendQuery(`{user{name, image, lessons{title, value}}}`).then(data => {
       // console.log(data);
       setLogin({...data.user, loading: false})
     })
-  }
+  }, [])
 
   if(login.loading) {
     return <h1>Loading...</h1>

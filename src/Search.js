@@ -1,9 +1,9 @@
 import React from 'react';
 import sendQuery from './sendQuery'
 
-const PokeName = (props) => {
-  return <h3 style={{cursor: "pointer"}} onClick={props.clickSelection}>{props.pokeList}</h3>
-}
+// const PokeName = (props) => {
+//   return <h3 style={{cursor: "pointer"}} onClick={props.clickSelection}>{props.pokeList}</h3>
+// }
 
 const PokemonSelected = (props) => {
   const login = (pokemonName) => {
@@ -26,16 +26,8 @@ export const Search = (props) => {
   const [selectedPokemon, setSelectedPokemon] = React.useState({})
 
   const handleSearchTerm = (e) => {
-    // console.log(e);
     sendQuery(`{search(str:"${e.target.value}"){name}}`).then(data => {
-      // console.log(data.search);
-      if(e.target.value !== '') {
-        setPokemonList(data.search)
-      }
-      if(e.target.value === '') {
-        // console.log("fwgwe");
-        setPokemonList([])
-      }
+      setPokemonList(e.target.value ? data.search : [])
       setSelectedPokemon({})
     })
   }
@@ -64,20 +56,8 @@ export const Search = (props) => {
     })
   }
 
-  // const clickSelection = (e) => {
-  //   console.log("yes");
-  //   console.log(e);
-  //   sendQuery(`{getPokemon(str:"${e.target.textContext}"){name, image}}`).then(data => {
-  //     setSelectedPokemon({
-  //       name: data.getPokemon.name,
-  //       image: data.getPokemon.image
-  //     })
-  //     setPokemonList([])
-  //   })
-  // }
-
   const pokemonFound = pokemonList.map((pokemon, i) => {
-    return <PokeName pokeList={pokemon.name} key={i} clickSelection={handleClickSelection}/>
+    return <h3 style={{cursor: "pointer"}} onClick={handleClickSelection} key={i}>{pokemon.name}</h3>
   })
 
 

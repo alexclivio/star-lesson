@@ -132,7 +132,7 @@ const resolvers = {
       }
     },
     user: (_x, args, context) => {
-      console.log("user: " + context.req.session.pokemon)
+      // console.log("user: " + context.req.session.pokemon)
       if(context.req.session.pokemon) {
         return cachePokemonSession[context.req.session.pokemon]
       }
@@ -165,7 +165,7 @@ const startApp = async () => {
         }
       })
       cacheLessons = results
-      return console.log('lessons cached')
+      // return console.log('lessons cached')
     })
 
   const pokemon = fetch('https://pokeapi.co/api/v2/pokemon?limit=1000')
@@ -173,7 +173,7 @@ const startApp = async () => {
     return r.json()
   }).then(data => {
     cachePokemon = data.results
-    return console.log('it works bro, stop')
+    // return console.log('it works bro, stop')
   })
 
   await Promise.all([lessons, pokemon])
