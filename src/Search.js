@@ -2,7 +2,7 @@ import React from 'react';
 import sendQuery from './sendQuery'
 
 const PokeName = (props) => {
-  return <h3>{props.pokeList}</h3>
+  return <h3 onClick={props.clickSelection}>{props.pokeList}</h3>
 }
 
 const PokemonSelected = (props) => {
@@ -53,6 +53,17 @@ export const Search = (props) => {
     }
    }
 
+  const handleClickSelection = (e) => {
+    console.log(e.target.textContent);
+    sendQuery(`{getPokemon(str:"${e.target.textContent}"){name, image}}`).then(data => {
+      setSelectedPokemon({
+        name: data.getPokemon.name,
+        image: data.getPokemon.image
+      })
+      setPokemonList([])
+    })
+  }
+
   // const clickSelection = (e) => {
   //   console.log("yes");
   //   console.log(e);
@@ -66,7 +77,7 @@ export const Search = (props) => {
   // }
 
   const pokemonFound = pokemonList.map((pokemon, i) => {
-    return <PokeName pokeList={pokemon.name} key={i}/>
+    return <PokeName pokeList={pokemon.name} key={i} clickSelection={handleClickSelection}/>
   })
 
 
@@ -74,7 +85,7 @@ export const Search = (props) => {
     <div className="mainContainer">
       <div className="app">
         <h1 className="pokeMain">Pokemon Search</h1>
-        <input className="pokeInput" type="text" onChange={handleSearchTerm} onKeyUp={loadSelection} />
+        <input className="pokeInput" type="text" onChange={handleSearchTerm} onKeyUp={loadSelection}/>
       </div>
       <div className="searchResults-container">
         {pokemonFound}
