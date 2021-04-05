@@ -17,7 +17,7 @@ app.use(session({
   saveUninitialized: false
 }))
 
-app.get('/4/*', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(__dirname+'/public/4.html')
 })
 
